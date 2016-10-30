@@ -33,14 +33,12 @@ database. Assuming you set up the targets as above, you can do this with:
 ```
 # From repository root:
 bazel clean
-bazel build
---experimental_action_listener=tools/actions:generate_compile_commands_listener
-BAZEL_LABELS
+bazel build --experimental_action_listener=tools/actions:generate_compile_commands_listener BAZEL_LABELS
 ./tools/actions/generate_compile_commands_json.py
 ```
 
 This creates the compilation database file in the repository root with the name
-'compile_commands.json`. Other clang tools like `clang-tidy` also like this
+`compile_commands.json`. Other clang tools like `clang-tidy` also like this
 file!
 
 To get a static analysis repot, just call `analyze-build`, which was installed
@@ -54,10 +52,11 @@ This generates html files in clang-analysis/scan-xxx, which you can serve or
 view with a tool of your choice.
 
 ##Gotchas
-If you use a bazel externalized crosstool, you'll have to pass in the compiler
-path to analyze-build using the `--use-analyzer` option. In addition, you might
-have problems with bazel's crazy source tree. In my repository, I had to execute
-`analyze-build` from the bazel execution_root:
+If you use a bazel externalized crosstool (instead of just one in /usr/bin),
+you'll have to pass in the compiler path to analyze-build using the
+`--use-analyzer` option. In addition, you might have problems with bazel's crazy
+source tree. In my repository, I had to execute `analyze-build` from the bazel
+execution_root:
 
 ```
 REPO_ROOT=$PWD
