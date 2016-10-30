@@ -30,8 +30,8 @@ def _get_command(path, command_directory):
     return '''{
         "directory": "%s",
         "command": "%s",
-        "file": "%s",
-      },''' % (command_directory, contents[0].replace('"', '\\"'), contents[1])
+        "file": "%s"
+      },''' % (command_directory, ' '.join(new_command_spl), contents[1])
 
 '''
 Args:
@@ -62,6 +62,8 @@ def main(argv):
     f.write('[')
     for command in commands:
       f.write(command)
+    #Delete the last comma
+    f.seek(f.tell()-1)
     f.write(']')
 
 if __name__ == '__main__':
