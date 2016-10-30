@@ -3,7 +3,10 @@
 This repository contains scripts for running the [clang
 analyzer](http://clang-analyzer.llvm.org/) static
 analysis tool in a bazel workspace. It is forked from [this
-gist](https://gist.github.com/bsilver8192/0115ee5d040bb601e3b7).
+gist](https://gist.github.com/bsilver8192/0115ee5d040bb601e3b7). The key point
+is the generation of a clang [compilation
+database](http://clang.llvm.org/docs/JSONCompilationDatabase.html) file. This
+file is useful for many other tools as well, such as `clang-tidy`.
 
 ## Installation and setup
 Place `BUILD`, `generate_compile_command.py`, and
