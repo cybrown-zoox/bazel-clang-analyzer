@@ -24,7 +24,14 @@ pip install scan-build
 ```
 
 Setup is not at all stable. You may run into strange permissions and paths
-issues when executing. Sorry!
+issues when executing. Sorry!  You will need to edit most of the files. The
+bazel targets in `BUILD` must match your repo layout, and you must create a rule
+somewhere to make `extra_actions_proto_py` visible to this package. If you don't
+use the paths assumed here, you'll have to change the import paths in
+`generate_compile_command.py`. On the other hand,
+`generate_compile_commands_json.py` should work as is. If you use
+`run_clang_analyzer.sh`, you will probably need to change or remove the
+`--use-analyzer` option.
 
 ## Usage
 Before running static analysis tools, you must generate the compilation commands
